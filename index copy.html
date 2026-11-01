@@ -1,0 +1,770 @@
+﻿<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="description" content="Vefiti - Cảnh giác trước bẫy tuyển dụng và cờ bạc mạng.">
+  <title>Vefiti | Cảnh Giác</title>
+  <style>
+            :root {
+                --bg: #09070c;
+                --panel: #151018;
+                --panel2: #211126;
+                --text: #fff8ec;
+                --muted: #c9bdcf;
+                --line: #53304f;
+                --gold: #ffd37a;
+                --pink: #e873b7;
+                --danger: #ff7259;
+                --warn: #ffd05d;
+                --safe: #70ddb0;
+                --focus: #fff
+            }
+
+            * {
+                box-sizing: border-box
+            }
+
+            html {
+                scroll-behavior: smooth
+            }
+
+            body {
+                margin: 0;
+                background: radial-gradient(circle at 15% 0,#3d143b55,transparent 28%),radial-gradient(circle at 95% 40%,#4d164444,transparent 28%),var(--bg);
+                color: var(--text);
+                font: 17px/1.6 Arial,Helvetica,sans-serif;
+                overflow-x: hidden
+            }
+
+            .texture {
+                position: fixed;
+                inset: 0;
+                z-index: -1;
+                opacity: .28;
+                pointer-events: none;
+                background-image: radial-gradient(#b5308355 1px,transparent 1.5px);
+                background-size: 12px 12px;
+                mask-image: linear-gradient(#000,transparent 70%)
+            }
+
+            a {
+                color: inherit
+            }
+
+            button,input,textarea {
+                font: inherit
+            }
+
+            button {
+                cursor: pointer
+            }
+
+            .skip {
+                position: absolute;
+                left: -999px
+            }
+
+            .skip:focus {
+                left: 12px;
+                top: 12px;
+                z-index: 10;
+                background: var(--gold);
+                color: #1b1017;
+                padding: 10px
+            }
+
+            .nav {
+                position: sticky;
+                top: 0;
+                z-index: 5;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 16px;
+                padding: 14px max(18px,calc((100% - 1120px)/2));
+                background: #09070ced;
+                backdrop-filter: blur(12px);
+                border-bottom: 1px solid #ffffff15
+            }
+
+            .brand {
+                font-size: 1.25rem;
+                font-weight: 900;
+                letter-spacing: .08em;
+                text-decoration: none;
+                color: var(--gold);
+                line-height: 1.2
+            }
+
+            .brand small {
+                display: block;
+                font-size: .58rem;
+                letter-spacing: .12em;
+                color: var(--muted)
+            }
+
+            .nav-links {
+                display: flex;
+                gap: 8px;
+                overflow-x: auto;
+                white-space: nowrap;
+                scrollbar-width: none;
+                min-width: 0
+            }
+
+            .nav-links::-webkit-scrollbar {
+                display: none
+            }
+
+            .nav-links a {
+                flex: none;
+                text-decoration: none;
+                font-size: .85rem;
+                color: var(--muted);
+                padding: 7px 14px;
+                border-radius: 99px;
+                border: 1px solid transparent;
+                transition: all .2s
+            }
+
+            .nav-links a:hover {
+                color: var(--gold);
+                border-color: var(--line);
+                background: #ffd37a12
+            }
+
+            .theme {
+                flex: none;
+                border: 1px solid var(--line);
+                color: var(--text);
+                background: transparent;
+                border-radius: 99px;
+                min-width: 48px;
+                height: 42px
+            }
+
+            .wrap {
+                width: 100%;
+                max-width: 1120px;
+                margin-inline:auto;padding-inline:18px}
+
+            section {
+                position: relative;
+                padding-block:72px;margin: 0;
+                scroll-margin-top: 90px
+            }
+
+            section::before {
+                content: "";
+                position: absolute;
+                left: 18px;
+                right: 18px;
+                top: 0;
+                height: 1px;
+                background: linear-gradient(90deg,transparent,var(--gold),transparent);
+                opacity: .25
+            }
+
+            .hero::before {
+                display: none
+            }
+
+            .hero {
+                min-height: 640px;
+                display: grid;
+                align-content: center;
+                padding-block:58px 42px}
+
+            .eyebrow,.tag {
+                display: inline-flex;
+                width: max-content;
+                max-width: 100%;
+                align-items: center;
+                gap: 8px;
+                border: 1px solid var(--line);
+                border-radius: 99px;
+                padding: 6px 11px;
+                color: var(--gold);
+                font-size: .8rem;
+                font-weight: bold;
+                letter-spacing: .04em
+            }
+
+            .eyebrow {
+                margin-bottom: 20px
+            }
+
+            .hero h1 {
+                font-size: clamp(3rem,10vw,7.4rem);
+                line-height: 1.15;
+                letter-spacing: -.06em;
+                text-transform: uppercase;
+                margin: 22px 0 18px;
+                max-width: 900px;
+                overflow-wrap: anywhere;
+                text-shadow: 0 0 20px #ffd37a55
+            }
+
+            .hero h1 span {
+                color: var(--gold)
+            }
+
+            .lead {
+                max-width: 650px;
+                color: var(--muted);
+                font-size: 1.1rem
+            }
+
+            .scan {
+                margin: 32px 0 30px;
+                background: linear-gradient(120deg,#2b172daa,#17121b);
+                border: 1px solid var(--line);
+                padding: 20px 28px;
+                clip-path: polygon(0 0,97% 0,100% 12%,100% 100%,3% 100%,0 88%)
+            }
+
+            .scan label {
+                font-weight: bold
+            }
+
+            .scan-row {
+                display: flex;
+                gap: 10px;
+                margin-top: 10px
+            }
+
+            .scan input {
+                min-width: 0;
+                flex: 1;
+                border: 1px solid #76516c;
+                background: #09070c;
+                color: var(--text);
+                padding: 14px;
+                border-radius: 7px
+            }
+
+            .btn {
+                min-height: 48px;
+                border: 0;
+                padding: 11px 18px;
+                border-radius: 99px;
+                font-weight: 800;
+                transition: .2s;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                gap: 8px;
+                text-decoration: none;
+                text-align: center
+            }
+
+            .btn:hover {
+                transform: translateY(-2px);
+                filter: brightness(1.08)
+            }
+
+            .btn:focus-visible,input:focus-visible,textarea:focus-visible {
+                outline: 3px solid var(--focus);
+                outline-offset: 3px
+            }
+
+            .btn[aria-disabled="true"] {
+                pointer-events: none;
+                opacity: .5
+            }
+
+            .primary {
+                background: var(--gold);
+                color: #251521
+            }
+
+            .secondary {
+                background: transparent;
+                color: var(--text);
+                border: 1px solid var(--line)
+            }
+
+            .analysis-actions {
+                display: flex;
+                gap: 10px;
+                margin-top: 16px
+            }
+
+            .analysis-actions .btn {
+                flex: 1;
+                margin: 0
+            }
+
+            #analyzeBtn,
+            #hotlineBtn {
+                min-height: 48px
+            }
+
+            h2 {
+                font-size: clamp(2rem,6vw,4rem);
+                line-height: 1.2;
+                margin: 0 0 15px;
+                text-transform: uppercase;
+                letter-spacing: -.05em;
+                overflow-wrap: anywhere
+            }
+
+            h3 {
+                line-height: 1.3;
+                margin: 0 0 .5em
+            }
+
+            .section-lead {
+                max-width: 730px;
+                color: var(--muted);
+                margin-top: 0
+            }
+
+            .routes {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 14px;
+                margin-top: 28px
+            }
+
+            .route {
+                min-height: 200px;
+                padding: 25px 38px 36px 25px;
+                gap: 14px;
+                text-decoration: none;
+                color: var(--text);
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                border: 1px solid var(--line);
+                background: #170f19;
+                clip-path: polygon(0 0,100% 0,100% 88%,92% 100%,0 100%)
+            }
+
+            .route:nth-child(1) {
+                box-shadow: inset 0 -70px 80px #ff72591f
+            }
+
+            .route:nth-child(2) {
+                box-shadow: inset 0 -70px 80px #b67cff1f
+            }
+
+            .route strong {
+                font-size: 1.7rem;
+                line-height: 1.25
+            }
+
+            .grid {
+                display: grid;
+                grid-template-columns: repeat(3,1fr);
+                gap: 24px
+            }
+
+            .trick-grid {
+                display: grid;
+                grid-template-columns: repeat(2,1fr);
+                gap: 24px
+            }
+
+            .check-layout {
+                display: grid;
+                grid-template-columns: 1.25fr .75fr;
+                gap: 20px;
+                align-items: start
+            }
+
+            .grid>*,.trick-grid>*,.check-layout>*,.routes>* {
+                min-width: 0
+            }
+
+            .news-card,.card,.scenario {
+                padding: 20px;
+                background: var(--panel);
+                border: 1px solid #ffffff18
+            }
+
+            .news-card {
+                border-top: 3px solid var(--gold);
+                display: flex;
+                flex-direction: column;
+                gap: 6px
+            }
+
+            .news-card .btn {
+                margin-top: auto;
+                align-self: flex-start
+            }
+
+            .meta {
+                font-size: .8rem;
+                color: var(--muted);
+                margin: 0
+            }
+
+            .chips {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 8px;
+                margin-bottom: 6px
+            }
+
+            .tag {
+                font-size: .72rem;
+                padding: 4px 9px;
+                margin: 0
+            }
+
+            .tag.sample {
+                color: var(--pink)
+            }
+
+            .tab-list {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 8px;
+                margin: 22px 0
+            }
+
+            .tab {
+                min-height: 46px;
+                background: transparent;
+                border: 1px solid var(--line);
+                color: var(--muted);
+                padding: 8px 15px;
+                border-radius: 99px
+            }
+
+            .tab.active {
+                background: var(--gold);
+                color: #27151e;
+                border-color: var(--gold)
+            }
+
+            .input-area {
+                display: block;
+                width: 100%;
+                min-height: 190px;
+                resize: vertical;
+                background: #0b080d;
+                color: var(--text);
+                border: 1px solid var(--line);
+                padding: 14px;
+                border-radius: 8px;
+                margin-top: 8px
+            }
+
+            #imageInput {
+                display: block;
+                max-width: 100%;
+                margin-top: 8px
+            }
+
+            .hidden {
+                display: none!important
+            }
+
+            .preview {
+                max-width: 100%;
+                max-height: 200px;
+                margin-top: 12px
+            }
+
+            .note {
+                font-size: .9rem;
+                color: var(--muted)
+            }
+
+            .result {
+                margin-top: 28px;
+                padding: 22px;
+                border: 1px solid var(--line);
+                background: #110d14
+            }
+
+            .result-head {
+                display: flex;
+                align-items: flex-start;
+                justify-content: space-between;
+                gap: 12px;
+                margin-bottom: 16px
+            }
+
+            .result-head h3 {
+                margin: .3em 0
+            }
+
+            .level {
+                font-weight: 900;
+                letter-spacing: .05em
+            }
+
+            .danger {
+                color: var(--danger)
+            }
+
+            .warn {
+                color: var(--warn)
+            }
+
+            .safe {
+                color: var(--safe)
+            }
+
+            .result ul {
+                padding-left: 20px
+            }
+
+            .source-label {
+                font-size: .8rem;
+                color: var(--muted);
+                border-top: 1px solid #ffffff18;
+                padding-top: 12px;
+                margin-top: 20px
+            }
+
+            .steps {
+                padding-left: 20px;
+                color: var(--muted)
+            }
+
+            .checklist label {
+                display: flex;
+                align-items: flex-start;
+                gap: 10px;
+                padding: 11px 0;
+                border-bottom: 1px solid #ffffff12
+            }
+
+            .checklist input {
+                flex: none;
+                width: 21px;
+                height: 21px;
+                margin: 2px 0 0;
+                accent-color: var(--gold)
+            }
+
+            .callout {
+                padding: 20px;
+                border-left: 4px solid var(--gold);
+                background: #ffd37a12
+            }
+
+            .callout h3 {
+                margin-top: 0
+            }
+
+            .filter {
+                display: flex;
+                gap: 8px;
+                flex-wrap: wrap;
+                margin: 20px 0
+            }
+
+            .filter button {
+                min-height: 40px;
+                color: var(--text);
+                background: transparent;
+                border: 1px solid var(--line);
+                border-radius: 99px;
+                padding: 6px 13px
+            }
+
+            .filter .active {
+                background: var(--pink);
+                color: #190c16
+            }
+
+            .quiz-box {
+                max-width: 760px;
+                margin: auto;
+                background: var(--panel);
+                padding: 25px;
+                border: 1px solid var(--line)
+            }
+
+            .choice {
+                display: block;
+                width: 100%;
+                margin: 8px 0;
+                background: #0b080d;
+                color: var(--text);
+                border: 1px solid var(--line);
+                padding: 14px;
+                text-align: left;
+                border-radius: 8px
+            }
+
+            .choice:hover {
+                border-color: var(--gold)
+            }
+
+            .choice.correct {
+                border-color: var(--safe);
+                background: #70ddb01c
+            }
+
+            .choice.wrong {
+                border-color: var(--danger);
+                background: #ff72591c
+            }
+
+            #quizExplain {
+                margin-top: 12px
+            }
+
+            .footer {
+                padding-block:60px;color: var(--muted);
+                font-size: .9rem
+            }
+
+            body.light {
+                --bg: #fff8f0;
+                --panel: #fff;
+                --panel2: #f9e6f0;
+                --text: #22141c;
+                --muted: #614f5c;
+                --line: #cfafc2;
+                --focus: #000;
+                --gold: #a55a00
+            }
+
+            body.light .nav {
+                background: #fff8f0ed
+            }
+
+            body.light .scan,body.light .route,body.light .result,body.light .choice,body.light .scan input,body.light .input-area {
+                background: #fff
+            }
+
+            body.light .texture {
+                opacity: .13
+            }
+
+            body.light .hero h1 {
+                text-shadow: none
+            }
+
+            body.light .primary,body.light .tab.active,body.light .skip:focus {
+                color: #fff
+            }
+
+            @media(max-width: 720px) {
+                body {
+                    font-size:16px
+                }
+
+                .nav {
+                    flex-wrap: wrap;
+                    gap: 8px 10px
+                }
+
+                .brand {
+                    order: 1
+                }
+
+                .theme {
+                    order: 2;
+                    margin-left: auto
+                }
+
+                .nav-links {
+                    order: 3;
+                    flex: 1 1 100%
+                }
+
+                .nav-links a {
+                    font-size: .75rem;
+                    padding: 6px 12px
+                }
+
+                section {
+                    padding-block:56px;scroll-margin-top: 130px
+                }
+
+                .hero {
+                    min-height: auto;
+                    padding-block:40px 36px}
+
+                .hero h1 {
+                    font-size: clamp(2.4rem,12vw,4.4rem)
+                }
+
+                .scan {
+                    padding: 18px 22px
+                }
+
+                .scan-row,.result-head,.analysis-actions {
+                    flex-direction: column
+                }
+
+                .scan-row .btn,
+                .analysis-actions .btn {
+                    width: 100%
+                }
+
+                .routes,.grid,.check-layout,.trick-grid {
+                    grid-template-columns: 1fr
+                }
+
+                .route {
+                    min-height: 170px
+                }
+
+                .route strong {
+                    font-size: 1.4rem
+                }
+            }
+        </style>
+</head>
+<body><div class="texture"></div><a class="skip" href="#home">Bỏ qua menu</a>
+<nav class="nav"><a class="brand" href="#home">VEFITI<small>CẢNH GIÁC</small></a><div class="nav-links"><a href="#kiem-tra">Kiểm tra</a><a href="#viec-lam">Bẫy tuyển dụng</a><a href="#tin-tuc">Cảnh báo</a><a href="#quiz">Quiz</a><a href="#ve-chung-toi">Về chúng tôi</a></div><button class="theme" id="themeBtn" aria-label="Đổi chế độ sáng tối">◐</button></nav>
+<main>
+<section class="wrap hero" id="home"><span class="eyebrow">◐ KIỂM TRA TRƯỚC KHI TIN</span><h1>CẢNH GIÁC VỚI<br>THÔNG TIN <span>“ẢO”</span></h1><p class="lead">Bạn có quyền kiểm chứng trước khi tin, chia sẻ hoặc làm theo. Vefiti giúp bạn nhìn rõ những dấu hiệu đáng ngờ mà không phán xét.</p><div class="scan"><label for="quickText">Có tin nhắn đáng ngờ? Dán vào đây.</label><div class="scan-row"><input id="quickText" placeholder="Ví dụ: Làm nhiệm vụ like video, nạp 500k nhận hoa hồng..."><a class="btn primary" href="#kiem-tra" id="quickGo">KIỂM TRA NGAY →</a></div></div></section>
+<section class="wrap"><h2>CHỌN ĐÚNG CỬA<br>ĐỂ XEM RÕ BẪY.</h2><div class="routes"><a class="route" href="#viec-lam"><span class="tag">01 · TUYỂN DỤNG</span><strong>TUYỂN DỤNG<br>LÀM THÊM</strong><span>Nhìn theo từng bước chiêu trò →</span></a><a class="route" href="#co-bac"><span class="tag">02 · QUẢNG CÁO RỦI RO</span><strong>CỜ BẠC<br>MẠNG</strong><span>Thoát vòng xoáy “gỡ gạc” →</span></a></div></section>
+<!-- HOTLINE: Sau khi xác minh số chính thức của đơn vị công an mạng, đổi id="hotlineBtn" thành href="tel:+84SỐ_ĐIỆN_THOẠI" hoặc thêm data-hotline. Không đặt số chưa xác minh vào website công khai. -->
+<section class="wrap" id="kiem-tra"><span class="eyebrow">BỘ KIỂM TRA</span><h2>ĐỪNG TIN TƯỞNG <br>KHI CHƯA RÕ.</h2><p class="section-lead">Chỉ phân tích chữ bạn nhập và dạng link xuất hiện trong nội dung. Vefiti không mở link, không lưu nội dung của bạn.</p><div class="tab-list"><button class="tab active" data-tab="text">Dán nội dung</button><button class="tab" data-tab="image">Tải ảnh chụp</button></div><div class="check-layout"><div><div id="textPanel"><label for="analyzeText">Tin nhắn, bài tuyển dụng, caption hoặc đoạn chat</label><textarea class="input-area" id="analyzeText" placeholder="Dán nội dung vào đây..."></textarea></div><div id="imagePanel" class="hidden"><label for="imageInput">Chọn ảnh chụp màn hình (JPG, PNG hoặc WEBP · tối đa 5 MB)</label><input id="imageInput" type="file" accept="image/jpeg,image/png,image/webp"><img id="imagePreview" class="preview hidden" alt="Xem trước ảnh đã chọn"><p class="note" id="imageStatus">Chế độ hiện tại chưa đọc ảnh. Hãy gõ lại phần chữ quan trọng để kiểm tra.</p><textarea class="input-area" id="imageText" placeholder="Gõ lại nội dung trong ảnh (không bắt buộc khi AI đã được bật)..."></textarea></div><div class="analysis-actions"><button class="btn primary" id="analyzeBtn">⚑ PHÂN TÍCH DẤU HIỆU</button><a class="btn secondary" id="hotlineBtn" href="#hotline-chua-co-so">☎ HOTLINE CÔNG AN MẠNG</a></div></div><aside class="card"><h3>Vefiti đang làm gì?</h3><p>So khớp dấu hiệu bằng bộ luật cơ bản. Đây là nhận định ban đầu, không phải kết luận về một cá nhân hay tổ chức.</p><p class="note">Khi có link: chỉ xem phần chữ và dạng link như link rút gọn/đuôi lạ; không truy cập link.</p></aside></div><div id="analysisResult" class="result hidden" aria-live="polite"></div></section>
+<section class="wrap" id="viec-lam"><span class="eyebrow">01 · CẢNH BÁO SÂU</span><h2>VIỆC LÀM THẬT<br>KHÔNG ÉP BẠN VỘI.</h2><p class="section-lead">Những tình huống dưới đây mô tả thủ đoạn phổ biến để nhận diện. [Nguồn: điền nguồn đã xác minh]</p><div class="trick-grid" id="jobTricks"><article class="card"><h3>Nhiệm vụ nạp tiền</h3><p>Hứa việc nhẹ (bấm like, đặt đơn ảo) nhưng bắt buộc nạp tiền trước để mở nhiệm vụ lớn hơn.</p></article><article class="card"><h3>Phí hồ sơ / đồng phục / đặt cọc</h3><p>Yêu cầu chuyển khoản trước khi được phỏng vấn hoặc ký hợp đồng lao động.</p></article><article class="card"><h3>Nhận tiền hộ / thuê tài khoản</h3><p>Rủ bạn cho mượn tài khoản ngân hàng để nhận tiền hộ, rủi ro pháp lý chính là bạn.</p></article><article class="card"><h3>Thực tập / học bổng giả</h3><p>Mời thực tập hoặc học bổng nhưng sau đó yêu cầu nộp phí xử lý hồ sơ.</p></article><article class="card"><h3>Đa cấp trá hình</h3><p>Kêu gọi bạn giới thiệu người khác vào để nhận hoa hồng từ khoản họ nạp tiền.</p></article><article class="card"><h3>Việc làm lương cao nước ngoài</h3><p>Hứa lương cao ở nước ngoài, sau đó giữ giấy tờ, cưỡng cầu làm việc không hợp đồng.</p></article></div><div class="grid" style="margin-top:20px"><div class="card checklist"><h3>Checklist dấu hiệu</h3><label><input type="checkbox"> Hứa việc nhẹ, lương cao bất thường</label><label><input type="checkbox"> Yêu cầu nạp tiền hoặc chuyển khoản trước</label><label><input type="checkbox"> Không cho hợp đồng/địa chỉ rõ ràng</label><label><input type="checkbox"> Rủ nhận tiền hộ, thuê/mượn tài khoản</label></div><div class="card"><h3>Hỏi trước khi tin</h3><ul><li>Cho mình tên pháp lý, mã số thuế và địa chỉ công ty?</li><li>Công việc, lương, thời gian thử việc ghi trong hợp đồng thế nào?</li><li>Có khoản phí nào không? Nếu có, căn cứ nào?</li></ul><p>Đối chiếu mã số thuế, địa chỉ, người đại diện và hợp đồng trước khi nhận việc. <strong>[điền link chính thức đã xác minh]</strong></p></div><div class="callout"><h3>Tình huống minh họa</h3><p><b>Hư cấu:</b> Một bạn thấy việc “bấm thích nhận hoa hồng”. Ban đầu nhận khoản nhỏ, sau đó được nói phải nạp tiền để mở nhiệm vụ lớn. Khi muốn rút, hệ thống yêu cầu nạp thêm. Đây là lúc cần dừng lại, không “gỡ” bằng tiền mới.</p></div></div><div class="callout" style="margin-top:18px"><h3>Nếu đã lỡ nạp tiền hoặc đưa giấy tờ</h3><p>Ngừng chuyển tiền. Lưu ảnh chụp, lịch sử chat và thông tin giao dịch. Liên hệ ngân hàng, báo cơ quan công an theo hướng dẫn địa phương. Số điện thoại/địa chỉ: <b>[điền sau khi tôi xác minh]</b>.</p></div></section>
+<section class="wrap" id="co-bac"><span class="eyebrow">02 · CẢNH BÁO SÂU</span><h2>“GỠ GẠC” KHÔNG<br>PHẢI LỐI RA.</h2><p class="section-lead">Không nêu tên, không dẫn link và không hướng dẫn sử dụng bất kỳ trang cờ bạc nào. [Nguồn: điền nguồn đã xác minh]</p><div class="trick-grid"><article class="card"><h3>Họ tiếp cận thế nào?</h3><p>Quảng cáo ngụy trang game; caption “kiếm tiền dễ”; người có ảnh hưởng quảng cáo; nhóm chat tự xưng “soi cầu”; tặng tiền cược, hoàn tiền hoặc thưởng nạp lần đầu.</p></article><article class="card"><h3>Vòng xoáy thường diễn ra</h3><ol class="steps"><li>Thắng nhỏ để tạo niềm tin.</li><li>Nạp thêm vì nghĩ mình đang hiểu cách chơi.</li><li>Thua và muốn lấy lại ngay.</li><li>Vay nóng/app vay rồi bị đòi nợ.</li></ol><p><b>“Gỡ” là bẫy</b> vì khoản thua trước khiến quyết định sau dễ vội vàng và rủi ro hơn.</p></article><article class="card"><h3>Bẫy khi rút tiền</h3><p>Có thể bị yêu cầu đóng “thuế”, “phí xác minh” hoặc “mở khóa”. Không chuyển thêm tiền chỉ để được rút tiền.</p></article><article class="card"><h3>Rủi ro pháp lý</h3><p>Hoạt động tổ chức, giới thiệu, rủ rê hoặc làm đại lý liên quan cờ bạc có thể mang rủi ro pháp lý. <b>[điền nguồn pháp lý đã xác minh]</b></p></article></div><div class="callout" style="margin-top:18px"><h3>Nếu bạn hoặc bạn bè đang mắc kẹt</h3><p>Bạn không cần tự chịu một mình. Hãy nói với phụ huynh, thầy cô, người thân đáng tin hoặc tư vấn viên trường. Nguồn hỗ trợ: <b>[điền sau khi tôi xác minh]</b>.</p></div></section>
+<section class="wrap" id="tin-tuc"><span class="eyebrow">CẬP NHẬT</span><h2>CẢNH BÁO<br>MỚI NHẤT.</h2><p class="section-lead">Ba mục dưới đây là dữ liệu mẫu, không phải bài báo thật. Thêm bài vào mảng <code>TIN_TUC</code> ở đầu JavaScript sẽ tự hiện theo ngày mới nhất.</p><div class="filter" id="newsFilters"><button class="active" data-filter="Tất cả">Tất cả</button><button data-filter="Bẫy tuyển dụng">Bẫy tuyển dụng</button><button data-filter="Cờ bạc">Cờ bạc</button><button data-filter="Khác">Khác</button></div><div class="grid" id="newsList"></div></section>
+<section class="wrap" id="quiz"><span class="eyebrow">MINI-QUIZ · 9 CÂU</span><h2>BẠN CÓ NHẬN<br>RA BẪY KHÔNG?</h2><div class="quiz-box" id="quizBox"></div></section>
+<section class="wrap" id="ve-chung-toi"><span class="eyebrow">VỀ VEFITI</span><h2>RÕ DẤU HIỆU.<br>BỚT RỦI RO.</h2><div class="grid"><div class="card"><h3>Vì sao làm dự án?</h3><p>Nhiều bẫy bắt đầu bằng một tin nhắn ngắn. Vefiti giúp người trẻ dừng lại, kiểm tra và hỏi đúng câu trước khi chuyển tiền hay gửi thông tin cá nhân.</p></div><div class="card"><h3>Cách trang hoạt động</h3><ol><li>Dán hoặc gõ lại nội dung.</li><li>Xem các dấu hiệu và câu hỏi nên hỏi.</li><li>Tự kiểm chứng trước khi hành động.</li></ol></div><div class="card"><h3>Điều chúng tôi nói thẳng</h3><p>Bản này dùng bộ luật kiểm tra dấu hiệu nên có thể nhận sai. AI sẽ được bổ sung sau. Công cụ không thay thế ngân hàng, luật sư hay cơ quan chức năng.</p></div></div><p class="note" style="margin-top:24px">Nhóm: <b>[Tên nhóm]</b> · Trường: <b>[Tên trường]</b> · Email: <b>[email@thay-o-day]</b></p></section>
+</main><footer class="wrap footer">VEFITI · CẢNH GIÁC TRƯỚC KHI TIN · Không lưu nội dung bạn nhập.</footer>
+<script>
+/* ==================== CẤU HÌNH: đổi CHE_DO thành 'ai' sau khi backend đã có AI ==================== */
+const CONFIG={CHE_DO:'ai',API_URL:'/api/analyze'};
+/* Thêm bài mới vào đây. Ngày dạng YYYY-MM-DD để sắp xếp đúng, link chỉ dùng khi đã xác minh. */
+const TIN_TUC=[
+ {ngay:'2026-10-15',tieu_de:'Ví dụ: Kiểm tra kỹ yêu cầu nộp phí trước khi nhận việc',nguon:'Tin mẫu',tom_tat:'Nội dung mẫu để thay bằng bài báo hoặc thông báo đã được bạn kiểm chứng.',chu_de:'Bẫy tuyển dụng',link:'#'},
+ {ngay:'2026-10-10',tieu_de:'Ví dụ: Nhận diện quảng cáo hứa hẹn tiền dễ',nguon:'Tin mẫu',tom_tat:'Bài mẫu, không phải tin tức thật và không chứa đường dẫn cờ bạc.',chu_de:'Cờ bạc',link:'#'},
+ {ngay:'2026-10-03',tieu_de:'Ví dụ: Dừng lại trước khi gửi ảnh giấy tờ cá nhân',nguon:'Tin mẫu',tom_tat:'Bài mẫu để nhóm thay thế bằng nguồn đáng tin cậy.',chu_de:'Khác',link:'#'}
+];
+const LUAT_VIEC_LAM=[
+ {tu_khoa:['nap tien','chuyen khoan truoc','dat coc'],diem:38,kieu:'yêu cầu nộp tiền trước',giai_thich:'Yêu cầu nạp tiền, đặt cọc hoặc chuyển khoản trước.'},
+ {tu_khoa:['lam nhiem vu','like video','dat don ao','hoa hong'],diem:35,kieu:'làm nhiệm vụ nạp tiền',giai_thich:'Dấu hiệu nhiệm vụ/hoa hồng có thể dẫn tới yêu cầu nạp tiền.'},
+ {tu_khoa:['viec nhe','luong cao','khong can kinh nghiem'],diem:15,kieu:'lời mời việc quá hấp dẫn',giai_thich:'Lời hứa việc nhẹ, lương cao hoặc không cần kinh nghiệm.'},
+ {tu_khoa:['tuyen ctv','nhan tien ho','thue tai khoan','muon tai khoan'],diem:42,kieu:'nhận tiền hộ hoặc thuê tài khoản',giai_thich:'Có dấu hiệu nhận tiền hộ/cho thuê tài khoản, rủi ro cho chính bạn.'},
+ {tu_khoa:['phi ho so','dong phuc'],diem:25,kieu:'thu phí tuyển dụng',giai_thich:'Có yêu cầu phí hồ sơ hoặc đồng phục cần kiểm chứng.'}
+];
+const LUAT_CO_BAC=[
+ {tu_khoa:['no hu','tai xiu','ban ca','nha cai','ca do','cá độ','cuoc','cược','keo bong da','soi keo'],diem:42,kieu:'quảng cáo nhà cái/cờ bạc',giai_thich:'Có từ khóa liên quan trực tiếp tới cá độ hoặc cờ bạc trực tuyến.'},
+ {tu_khoa:['soi cau','keo','cuoc','thuong nap','hoan tien','nap rut'],diem:34,kieu:'mời cược bằng ưu đãi',giai_thich:'Dùng ưu đãi, soi cầu hoặc kèo để thúc đẩy cược.'},
+ {tu_khoa:['dai ly','telegram','link vao nhom'],diem:24,kieu:'lôi kéo vào nhóm quảng cáo',giai_thich:'Có dấu hiệu lôi kéo vào nhóm hoặc làm đại lý.'}
+];
+const LUAT_GIA_DANH=[
+ {tu_khoa:['nhan vien cong an','cong an goi','nghe pham','bat may','tai khoan dieu tra','giai ngan theo dieu tra','chuyen tien vao tai khoan'],diem:55,kieu:'giả danh cơ quan công an',giai_thich:'Giả danh cơ quan công an hoặc đe dọa “nghe pháp” để ép chuyển tiền.'}
+];
+const DAU_HIEU_TIN_THAT=[{tu_khoa:['ma so thue','dia chi cong ty','hop dong lao dong','khong thu phi'],diem:-14,giai_thich:'Nêu thông tin công ty/hợp đồng hoặc cam kết không thu phí.'}];
+const norm=s=>(s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/đ/g,'d');
+function contract(data){return {muc_do:'can_than',diem_nghi_ngo:50,loai:'khong_ro',kieu:'cần kiểm chứng thêm',dau_hieu:[],cau_hoi_nen_hoi:['Bạn có thể cho thông tin liên hệ và căn cứ chính thức không?','Có khoản phí hoặc yêu cầu chuyển tiền nào không?'],nen_lam:'Dừng lại vài phút để đối chiếu thông tin trước khi trả lời hoặc chuyển tiền.',nguon_phan_tich:'luat',...data};}
+function analyzeBangLuat(input){const t=norm(input.text);let score=0,job=0,bet=0,signs=[],types=[];for(const r of LUAT_VIEC_LAM){if(r.tu_khoa.some(k=>t.includes(k))){score+=r.diem;job+=r.diem;signs.push(r.giai_thich);types.push(r.kieu)}}for(const r of LUAT_CO_BAC){if(r.tu_khoa.some(k=>t.includes(k))){score+=r.diem;bet+=r.diem;signs.push(r.giai_thich);types.push(r.kieu)}}for(const r of LUAT_GIA_DANH){if(r.tu_khoa.some(k=>t.includes(k))){score+=r.diem;signs.push(r.giai_thich);types.push(r.kieu)}}if(/\bnap\s*\d+[\d.,]*\s*(k|nghin|trieu|vnd|d)\b/.test(t)){score+=35;job+=35;signs.push('Yêu cầu nạp một khoản tiền cụ thể trước khi làm việc.');types.push('làm nhiệm vụ nạp tiền')}if(/(thuong|tang)\s*\d+[\d.,]*\s*(k|nghin|trieu|vnd|d).*nap|nap.*(thuong|tang)|soi cau.*mien phi/.test(t)){score+=25;bet+=25;signs.push('Ưu đãi nạp tiền hoặc soi cầu có thể nhằm lôi kéo cược.');types.push('quảng cáo nhà cái')}for(const r of DAU_HIEU_TIN_THAT){if(r.tu_khoa.some(k=>t.includes(k))){score+=r.diem;signs.push(r.giai_thich)}}if(/(bit\.ly|tinyurl|t\.me|\.xyz|\.top|\.click)/.test(t)){score+=18;signs.push('Có link rút gọn hoặc đuôi link cần kiểm chứng.')}score=Math.max(0,Math.min(100,score));let loai=job>bet?'viec_lam_lua_dao':bet>job?'co_bac_online':'khong_ro';let muc=score>=55?'nguy_hiem':score>=20?'can_than':'an_toan';let kieu=types[0]|| (muc==='an_toan'?'thông tin có vẻ minh bạch hơn':'chưa đủ thông tin để xác định');let questions=loai==='viec_lam_lua_dao'?['Cho mình mã số thuế, địa chỉ và người đại diện công ty?','Công việc có hợp đồng và có thu bất kỳ khoản phí nào không?','Vì sao cần chuyển tiền trước khi bắt đầu?']:loai==='co_bac_online'?['Đây có phải lời mời nạp tiền/cược hoặc vào nhóm không?','Có ai đang hứa hoàn tiền hay lợi nhuận dễ dàng không?','Tại sao phải chuyển thêm tiền để rút tiền?']:['Thông tin đơn vị đăng có thể kiểm chứng ở đâu?','Có khoản phí hoặc yêu cầu gửi giấy tờ nào không?'];return contract({muc_do:muc,diem_nghi_ngo:score,loai,kieu,dau_hieu:[...new Set(signs)].slice(0,4),cau_hoi_nen_hoi:questions,nen_lam:muc==='nguy_hiem'?'Không chuyển tiền, không gửi giấy tờ; lưu bằng chứng và kiểm chứng qua kênh chính thức.':muc==='can_than'?'Chưa vội tin. Hãy đối chiếu thông tin, đặc biệt trước khi bấm link hoặc chuyển tiền.':'Nội dung có vài dấu hiệu minh bạch, nhưng vẫn nên tự đối chiếu thông tin trước khi cung cấp dữ liệu cá nhân.'});}
+async function analyzeBangAI(input){const res=await fetch(CONFIG.API_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(input)});if(!res.ok){let error=await res.json().catch(()=>({error:'AI API unavailable'}));throw new Error(error.error||'AI API unavailable')}return await res.json();}
+async function analyze(input){if(CONFIG.CHE_DO==='ai'){const r=await analyzeBangAI(input);return contract({...r,nguon_phan_tich:'ai'})}return analyzeBangLuat(input);}
+const $=s=>document.querySelector(s);let activeTab='text',selectedImageData='';document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));b.classList.add('active');activeTab=b.dataset.tab;$('#textPanel').classList.toggle('hidden',activeTab!=='text');$('#imagePanel').classList.toggle('hidden',activeTab!=='image');});
+$('#quickGo').onclick=()=>{$('#analyzeText').value=$('#quickText').value;};$('#imageInput').onchange=e=>{const f=e.target.files[0];selectedImageData='';$('#imagePreview').classList.add('hidden');if(!f)return;const valid=['image/jpeg','image/png','image/webp'];if(!valid.includes(f.type)||f.size>5*1024*1024){e.target.value='';$('#imageStatus').textContent='Chỉ nhận ảnh JPG, PNG hoặc WEBP, dung lượng tối đa 5 MB.';return}const reader=new FileReader();reader.onload=()=>{selectedImageData=reader.result;$('#imagePreview').src=reader.result;$('#imagePreview').classList.remove('hidden');$('#imageStatus').textContent=CONFIG.CHE_DO==='ai'?'Ảnh sẵn sàng gửi tạm thời tới AI để phân tích; ảnh không được lưu lại.':'Chế độ hiện tại chưa đọc ảnh. Ảnh chỉ xem trước trên thiết bị; hãy gõ lại phần chữ quan trọng để kiểm tra.';};reader.readAsDataURL(f);};
+function prettyLoai(x){return ({viec_lam_lua_dao:'Bẫy tuyển dụng',co_bac_online:'Cờ bạc trực tuyến',lua_dao_khac:'Lừa đảo khác',khong_ro:'Chưa rõ loại'})[x]||x}function renderResult(r){let cl=r.muc_do==='nguy_hiem'?'danger':r.muc_do==='can_than'?'warn':'safe',title=r.muc_do==='nguy_hiem'?'⚠ NGUY HIỂM':r.muc_do==='can_than'?'◉ CẦN CẨN THẬN':'✓ CÓ VẺ AN TOÀN';let out=$('#analysisResult');out.classList.remove('hidden');out.innerHTML=`<div class="result-head"><div><div class="level ${cl}">${title}</div><h3>${prettyLoai(r.loai)} · ${r.kieu}</h3><p>Điểm nghi ngờ: <b>${r.diem_nghi_ngo}/100</b></p></div><button class="btn secondary" id="shareBtn">Chia sẻ kết quả</button></div><div class="grid"><div><h3>Dấu hiệu thấy được</h3><ul>${(r.dau_hieu.length?r.dau_hieu:['Chưa thấy dấu hiệu đủ mạnh.']).map(x=>`<li>${x}</li>`).join('')}</ul></div><div><h3>Câu nên hỏi</h3><ul>${r.cau_hoi_nen_hoi.map(x=>`<li>${x}</li>`).join('')}</ul></div><div><h3>Nên làm gì?</h3><p>${r.nen_lam}</p></div></div><p class="source-label">${r.nguon_phan_tich==='ai'?'Phân tích bằng AI':'Phân tích bằng bộ luật cơ bản'} · Không lưu nội dung bạn nhập.</p>`;$('#shareBtn').onclick=async()=>{let txt=`Vefiti: ${title}. Loại: ${prettyLoai(r.loai)}. Nên làm: ${r.nen_lam}`;try{await navigator.clipboard.writeText(txt);$('#shareBtn').textContent='Đã sao chép ✓';}catch{prompt('Sao chép đoạn này:',txt)}}}
+$('#analyzeBtn').onclick=async()=>{let text=activeTab==='text'?$('#analyzeText').value:$('#imageText').value;let imageUrl=activeTab==='image'?selectedImageData:'';if(!text.trim()&&!imageUrl){alert('Hãy dán nội dung hoặc chọn một ảnh cần kiểm tra.');return}if(CONFIG.CHE_DO==='luat'&&!text.trim()){alert('Bộ luật hiện chưa đọc được ảnh. Hãy gõ lại phần chữ quan trọng trong ảnh.');return}let out=$('#analysisResult');out.classList.remove('hidden');out.innerHTML=`<p>⏳ Đang phân tích ${imageUrl&&CONFIG.CHE_DO==='ai'?'ảnh và nội dung':'dấu hiệu'}…</p>`;await new Promise(r=>setTimeout(r,350));try{renderResult(await analyze({text,imageUrl}));}catch(error){out.innerHTML=`<div class="callout"><h3>Không thể kết nối Gemini</h3><p>Backend hoặc Gemini chưa phản hồi. Không có kết quả phân tích nào được suy ra bằng bộ luật trong chế độ AI.</p><p class="note">${error.message||'Vui lòng kiểm tra server và API key.'}</p></div>`;}};
+let filter='Tất cả';function renderNews(){let data=[...TIN_TUC].sort((a,b)=>b.ngay.localeCompare(a.ngay)).filter(n=>filter==='Tất cả'||n.chu_de===filter);$('#newsList').innerHTML=data.map(n=>`<article class="news-card"><div class="chips"><span class="tag sample">TIN MẪU</span><span class="tag">${n.chu_de}</span></div><p class="meta">${n.ngay} · ${n.nguon}</p><h3>${n.tieu_de}</h3><p>${n.tom_tat}</p><a class="btn secondary" href="${n.link}" ${n.link==='#'?'aria-disabled="true"':''}>Đọc bài gốc →</a></article>`).join('');}document.querySelectorAll('#newsFilters button').forEach(b=>b.onclick=()=>{filter=b.dataset.filter;document.querySelectorAll('#newsFilters button').forEach(x=>x.classList.remove('active'));b.classList.add('active');renderNews()});renderNews();
+const QUIZ=[['Tuyển cộng tác viên bấm thích, cần nạp 500.000đ để mở nhiệm vụ nhận hoa hồng.','Lừa đảo','Yêu cầu nạp tiền trước để làm nhiệm vụ là dấu hiệu nguy hiểm.'],['Cần gia sư Toán cuối tuần. Phụ huynh trao đổi lịch, địa điểm và mức công rõ ràng.','Bình thường','Không có dấu hiệu yêu cầu tiền trước; vẫn nên xác minh người liên hệ.'],['Tặng tiền khi nạp lần đầu, có nhóm “soi cầu” miễn phí.','Lừa đảo','Ưu đãi nạp tiền và soi cầu là dấu hiệu lôi kéo cược.'],['Thông báo phỏng vấn nêu địa chỉ, mã số thuế, người liên hệ và ghi rõ không thu phí.','Bình thường','Thông tin minh bạch hơn, nhưng vẫn cần đối chiếu độc lập.'],['Công việc đóng gói tại nhà, cần chuyển phí giữ chỗ ngay trong hôm nay.','Lừa đảo','Ép chuyển phí giữ chỗ là dấu hiệu cần dừng lại.'],['Mời nhận tiền hộ, dùng tài khoản ngân hàng cá nhân để lấy hoa hồng.','Lừa đảo','Không nhận tiền hộ hoặc cho thuê/mượn tài khoản.'],['Câu lạc bộ trường tuyển tình nguyện viên, có thông tin liên hệ trường và không thu phí.','Bình thường','Vẫn cần xác minh qua kênh chính thức của trường.'],['Tài khoản báo phải nộp phí “mở khóa” mới được rút tiền.','Lừa đảo','Không chuyển thêm tiền để cố rút tiền.'],['Việc làm thêm yêu cầu ký hợp đồng, mô tả ca làm và cách trả lương rõ.','Bình thường','Có dấu hiệu minh bạch hơn; hãy đọc kỹ hợp đồng.']];let qi=0,score=0;function renderQuiz(){let box=$('#quizBox');if(qi>=QUIZ.length){box.innerHTML=`<h3>Hoàn thành!</h3><p>Bạn nhận ra <b>${score}/${QUIZ.length}</b> tình huống.</p><p>${score>=7?'Bạn đã có phản xạ tốt: cứ giữ thói quen dừng lại và kiểm chứng.':'Không sao — điều quan trọng là dừng lại trước khi chuyển tiền hoặc gửi giấy tờ.'}</p><button class="btn primary" id="restartQuiz">Làm lại quiz</button>`;$('#restartQuiz').onclick=()=>{qi=score=0;renderQuiz()};return}let q=QUIZ[qi];box.innerHTML=`<p class="meta">Câu ${qi+1}/${QUIZ.length}</p><h3>“${q[0]}”</h3><button class="choice" data-a="Lừa đảo">⚠ Lừa đảo</button><button class="choice" data-a="Bình thường">✓ Bình thường</button><div id="quizExplain" class="note"></div>`;box.querySelectorAll('.choice').forEach(b=>b.onclick=()=>{let ok=b.dataset.a===q[1];if(ok){score++;b.classList.add('correct')}else{b.classList.add('wrong');[...box.querySelectorAll('.choice')].find(x=>x.dataset.a===q[1]).classList.add('correct')}box.querySelectorAll('.choice').forEach(x=>x.disabled=true);$('#quizExplain').innerHTML=`<p><b>${ok?'Đúng rồi.':'Chưa đúng.'}</b> ${q[2]}</p><button class="btn primary" id="nextQuiz">${qi===QUIZ.length-1?'Xem điểm':'Câu tiếp →'}</button>`;$('#nextQuiz').onclick=()=>{qi++;renderQuiz()};});}renderQuiz();
+$('#themeBtn').onclick=()=>{document.body.classList.toggle('light');localStorage.setItem('vefiti-theme',document.body.classList.contains('light')?'light':'dark')};if(localStorage.getItem('vefiti-theme')==='light')document.body.classList.add('light');
+</script></body></html>
+

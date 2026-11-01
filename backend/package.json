@@ -1,0 +1,17 @@
+{
+  "name": "vefiti-backend",
+  "version": "1.0.0",
+  "private": true,
+  "description": "API demo cho Vefiti - Canh Giac",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "dependencies": {
+    "@google/genai": "^1.30.0",
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "express-rate-limit": "^8.7.2"
+  }
+}
