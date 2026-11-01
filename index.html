@@ -93,8 +93,8 @@
 
             .brand {
                 font-size: 1.25rem;
-                font-weight: 900;
-                letter-spacing: .08em;
+              font-weight: 800;
+              letter-spacing: .06em;
                 text-decoration: none;
                 color: var(--gold);
                 line-height: 1.2
@@ -102,8 +102,9 @@
 
             .brand small {
                 display: block;
-                font-size: .58rem;
-                letter-spacing: .12em;
+              font-size: .65rem;
+              font-weight: 600;
+              letter-spacing: .06em;
                 color: var(--muted)
             }
 
@@ -304,7 +305,7 @@
             }
 
             #analyzeBtn,
-            #hotlineBtn {
+            #hotlineInput {
                 min-height: 48px
             }
 
@@ -316,6 +317,12 @@
                 line-height: 1.2;
                 letter-spacing: 0;
             }
+
+              #hotlineInput {
+                cursor: text;
+                font-weight: 600;
+                text-align: center;
+              }
 
             h2 {
                 font-size: clamp(2rem,6vw,4rem);
@@ -758,8 +765,8 @@
         <span class="eyebrow">◐ KIỂM TRA TRƯỚC KHI TIN</span>
         <h1>CẢNH GIÁC VỚI<br />THÔNG TIN <span>“ẢO”</span></h1>
         <p class="lead">
-          Bạn có quyền kiểm chứng trước khi tin, chia sẻ hoặc làm theo. Vefiti
-          giúp bạn nhìn rõ những dấu hiệu đáng ngờ mà không phán xét.
+          Bạn có quyền kiểm chứng trước khi tin, chia sẻ hoặc làm theo. 
+          Vefiti giúp bạn nhìn rõ những dấu hiệu đáng ngờ mà không phán xét.
         </p>
         <div class="scan">
           <label for="quickText">Có tin nhắn đáng ngờ? Dán vào đây.</label>
@@ -787,7 +794,7 @@
           >
         </div>
       </section>
-      <!-- HOTLINE: Sau khi xác minh số chính thức của đơn vị công an mạng, đổi id="hotlineBtn" thành href="tel:+84SỐ_ĐIỆN_THOẠI" hoặc thêm data-hotline. Không đặt số chưa xác minh vào website công khai. -->
+      <!-- Số do nhóm cung cấp; xác minh nguồn chính thức trước khi công bố. -->
       <section class="wrap" id="kiem-tra">
         <span class="eyebrow">BỘ KIỂM TRA</span>
         <h2>ĐỪNG TIN TƯỞNG <br />KHI CHƯA RÕ.</h2>
@@ -823,10 +830,6 @@
                 class="preview hidden"
                 alt="Xem trước ảnh đã chọn"
               />
-              <p class="note" id="imageStatus">
-                Chế độ hiện tại chưa đọc ảnh. Hãy gõ lại phần chữ quan trọng để
-                kiểm tra.
-              </p>
               <textarea
                 class="input-area"
                 id="imageText"
@@ -837,18 +840,20 @@
               <button class="btn primary" id="analyzeBtn">
                 PHÂN TÍCH DẤU HIỆU
               </button>
-              <a
+              <input
                 class="btn secondary"
-                id="hotlineBtn"
-                href="#hotline-chua-co-so"
-                >☎ HOTLINE CÔNG AN MẠNG</a
-              >
+                id="hotlineInput"
+                type="text"
+                value="0693 672 216"
+                readonly
+                aria-label="Số điện thoại liên hệ an ninh mạng"
+              />
             </div>
           </div>
           <aside class="card">
             <h3>Vefiti đang làm gì?</h3>
             <p>
-              So khớp dấu hiệu bằng bộ luật cơ bản. Đây là nhận định ban đầu,
+              Kiểm tra các dấu hiệu từ dữ liệu đầu vào. Đây là cảnh báo ban đầu,
               không phải kết luận về một cá nhân hay tổ chức.
             </p>
             <p class="note">
@@ -863,8 +868,8 @@
         <span class="eyebrow">01 · CẢNH BÁO SÂU</span>
         <h2>VIỆC LÀM THẬT<br />KHÔNG ÉP BẠN VỘI.</h2>
         <p class="section-lead">
-          Những tình huống dưới đây mô tả thủ đoạn phổ biến để nhận diện.
-          [Nguồn: điền nguồn đã xác minh]
+          Những tình huống dưới đây mô tả thủ đoạn phổ biến để nhận diện và
+          kiểm chứng thông tin tuyển dụng qua nguồn chính thức.
         </p>
         <div class="trick-grid" id="jobTricks">
           <article class="card">
@@ -938,7 +943,7 @@
             </ul>
             <p>
               Đối chiếu mã số thuế, địa chỉ, người đại diện và hợp đồng trước
-              khi nhận việc. <strong>[điền link chính thức đã xác minh]</strong>
+              khi nhận việc qua các nguồn chính thức.
             </p>
           </div>
           <div class="callout">
@@ -956,7 +961,7 @@
           <p>
             Ngừng chuyển tiền. Lưu ảnh chụp, lịch sử chat và thông tin giao
             dịch. Liên hệ ngân hàng, báo cơ quan công an theo hướng dẫn địa
-            phương. Số điện thoại/địa chỉ: <b>[điền sau khi tôi xác minh]</b>.
+            phương.
           </p>
         </div>
       </section>
@@ -965,7 +970,7 @@
         <h2>“GỠ GẠC” KHÔNG<br />PHẢI LỐI RA.</h2>
         <p class="section-lead">
           Không nêu tên, không dẫn link và không hướng dẫn sử dụng bất kỳ trang
-          cờ bạc nào. [Nguồn: điền nguồn đã xác minh]
+          cờ bạc nào; nội dung tập trung vào nhận diện rủi ro.
         </p>
         <div class="trick-grid">
           <article class="card">
@@ -999,9 +1004,9 @@
           <article class="card">
             <h3>Rủi ro pháp lý</h3>
             <p>
-              Hoạt động tổ chức, giới thiệu, rủ rê hoặc làm đại lý liên quan cờ
-              bạc có thể mang rủi ro pháp lý.
-              <b>[điền nguồn pháp lý đã xác minh]</b>
+              Quy định pháp lý phụ thuộc từng hành vi và thời điểm. Hãy tra cứu
+              nguồn pháp luật chính thức thay vì tin lời khẳng định từ tài khoản
+              lạ.
             </p>
           </article>
         </div>
@@ -1009,8 +1014,7 @@
           <h3>Nếu bạn hoặc bạn bè đang mắc kẹt</h3>
           <p>
             Bạn không cần tự chịu một mình. Hãy nói với phụ huynh, thầy cô,
-            người thân đáng tin hoặc tư vấn viên trường. Nguồn hỗ trợ:
-            <b>[điền sau khi tôi xác minh]</b>.
+            người thân đáng tin hoặc tư vấn viên trường.
           </p>
         </div>
       </section>
@@ -1076,28 +1080,28 @@ const CONFIG = { CHE_DO: 'ai', API_URL: '/api/analyze' };
 const TIN_TUC = [
   {
     ngay: '2026-10-15',
-    tieu_de: 'Ví dụ: Kiểm tra kỹ yêu cầu nộp phí trước khi nhận việc',
-    nguon: 'Tin mẫu',
+    tieu_de: '',
+    nguon: 'Báo tuổi trẻ',
     tom_tat:
-      'Nội dung mẫu để thay bằng bài báo hoặc thông báo đã được bạn kiểm chứng.',
+      '',
     chu_de: 'Bẫy tuyển dụng',
     link: 'https://tuoitre.vn/nld/no-ro-bay-tuyen-dung-196250719204253365.htm',
   },
   {
     ngay: '2026-10-10',
-    tieu_de: 'Ví dụ: Nhận diện quảng cáo hứa hẹn tiền dễ',
-    nguon: 'Tin mẫu',
-    tom_tat: 'Bài mẫu, không phải tin tức thật và không chứa đường dẫn cờ bạc.',
+    tieu_de: '',
+    nguon: 'Báo tuổi trẻ',
+    tom_tat: '',
     chu_de: 'Cờ bạc',
     link: 'https://tuoitre.vn/nld/danh-bac-tren-mang.html',
   },
   {
     ngay: '2026-10-03',
-    tieu_de: 'Ví dụ: Dừng lại trước khi gửi ảnh giấy tờ cá nhân',
-    nguon: 'Tin mẫu',
-    tom_tat: 'Bài mẫu để nhóm thay thế bằng nguồn đáng tin cậy.',
+    tieu_de: '',
+    nguon: 'Báo vnexpress',
+    tom_tat: '',
     chu_de: 'Khác',
-    link: '#',
+    link: 'https://vnexpress.net/mr-pips-quan-43-van-phong-lua-dao-theo-chieu-thuc-phao-dai-bat-kha-xam-pham-5139108.html',
   },
 ];
 const LUAT_VIEC_LAM = [
