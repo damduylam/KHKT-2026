@@ -1467,7 +1467,7 @@ function renderNews() {
   $('#newsList').innerHTML = data
     .map(
       (n) =>
-        `<article class="news-card"><div class="chips"><span class="tag sample">TIN MẪU</span><span class="tag">${n.chu_de}</span></div><p class="meta">${n.ngay} · ${n.nguon}</p><h3>${n.tieu_de}</h3><p>${n.tom_tat}</p><a class="btn secondary" href="${n.link}" ${n.link === '#' ? 'aria-disabled="true"' : ''}>Đọc bài gốc</a></article>`,
+        `<article class="news-card"><div class="chips"><span class="tag sample">TIN MỚI</span><span class="tag">${n.chu_de}</span></div><p class="meta">${n.ngay} · ${n.nguon}</p><h3>${n.tieu_de}</h3><p>${n.tom_tat}</p><a class="btn secondary" href="${n.link}" ${n.link === '#' ? 'aria-disabled="true"' : ''}>Đọc bài gốc</a></article>`,
     )
     .join('');
 }
